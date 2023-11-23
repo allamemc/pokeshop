@@ -1,3 +1,90 @@
 .pokemons{
     margin: 0 auto;
 }
+
+.paginacion{
+    margin: 0 auto;
+    width: 300px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.nombre{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: -30px;
+}
+
+.animacion-flecha{
+    animation: flecha 1s infinite;
+}
+
+@keyframes flecha {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+    100% { transform: translateY(0); }
+}
+
+.inicio-sesion{
+    font-size: 14px;
+}
+
+.footer {
+    backdrop-filter: blur(10px);}
+
+.titulo-pagina{
+    color: #fff;
+}
+
+.navbar{
+    background-color: #7BD6FF;
+    border-bottom: 0px;
+}
+
+.color-boton{
+    background-color: #6993F2;
+    border: 0px ;
+    color: white;
+}
+.color-boton:hover{
+    background-color: rgb(61, 84, 138);
+}
+
+.sombra-carrito{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border: 3px solid #fff;
+}
+
+/* Estilos base para el contenedor del video */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  /* Estilos para el video */
+  #myVideo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (max-width: 15px) {
+    /* Estilos específicos para dispositivos móviles o pantallas más pequeñas */
+    .video-container {
+      position: relative;
+      height: auto;
+    }
+    
+    #myVideo {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+  }
+    
