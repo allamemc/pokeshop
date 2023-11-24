@@ -35,7 +35,9 @@ html{
 }
 
 .footer {
-    backdrop-filter: blur(10px);}
+    backdrop-filter: blur(10px);
+
+}
 
 .titulo-pagina{
     color: #fff;
@@ -92,6 +94,12 @@ html{
     }
   }
 
+.fondo-png{
+    background-image: url("../img/fondo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
 
 

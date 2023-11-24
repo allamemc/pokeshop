@@ -160,3 +160,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // Carga los primeros Pokémon al cargar la página
   fetchPokemonData(currentOffset);
 });
+function esDispositivoMovil() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+}
+function cargar() {
+  if (esDispositivoMovil()) {
+    const videoContainer = document.querySelector(".video-container");
+    if (videoContainer) {
+      videoContainer.remove();
+      const fondoPokemon = document.querySelector(".fondo-pokemon");
+      fondoPokemon.classList.add("fondo-png");
+      const navbar = document.querySelector(".navbar");
+      navbar.style.backgroundColor = "#7ACAF9";
+      const footer = document.querySelector(".footer");
+      footer.style.backgroundColor = "#80AF72";
+    } else {
+      console.log("No se encontró el elemento con la clase .video-container");
+    }
+  }
+}
+
+// Cambiar el color de fondo de la barra de navegación
+
+// Esperar a que se cargue el DOM
+document.addEventListener("DOMContentLoaded", cargar);
