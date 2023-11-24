@@ -32,6 +32,10 @@ html{
 
 .inicio-sesion{
     font-size: 14px;
+    color: #fff !important;
+}
+.inicio-sesion::placeholder{
+    color: #fff;
 }
 
 .footer {

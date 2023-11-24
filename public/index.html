@@ -74,15 +74,31 @@
           </label>
           <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52 sombra-carrito"
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52 sombra-carrito gap-3"
             style="background-color: #7bd6ff"
           >
-            <input
-              type="text"
-              placeholder="Type here"
-              class="w-full max-w-xs input input-bordered inicio-sesion"
-            />
-            <li><a href="">Cerrar Sesión</a></li>
+            <form action="" class="flex flex-col gap-3">
+              <input
+                type="text"
+                placeholder="Escribe tu nombre"
+                class="w-full max-w-xs text-white bg-blue-400 h-7 input input-bordered inicio-sesion glass placeholder:text-white"
+                style="
+                  --tw-bg-opacity: 1;
+                  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+                "
+                id="nombreInput"
+              />
+              <li>
+                <button
+                  class="btn btn-sm btn-block color-boton hover:text-white iniciar-sesion"
+                  onclick="iniciarSesion()"
+                  id="botonSesion"
+                  type="submit"
+                >
+                  Entrar
+                </button>
+              </li>
+            </form>
           </ul>
         </div>
       </div>

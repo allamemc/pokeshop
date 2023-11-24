@@ -186,3 +186,54 @@ function cargar() {
 
 // Esperar a que se cargue el DOM
 document.addEventListener("DOMContentLoaded", cargar);
+
+function iniciarSesion() {
+  const nombre = document.getElementById("nombreInput").value;
+
+  if (nombre.trim() !== "") {
+    // Guardar nombre en el almacenamiento local
+    sessionStorage.setItem("nombre", nombre);
+
+    // Cambiar el botón a "Cerrar sesión"
+    const botonSesion = document.getElementById("botonSesion");
+    botonSesion.textContent = "Cerrar sesión";
+    botonSesion.onclick = cerrarSesion;
+
+    // Establecer el valor del input con el nombre de sesión
+    const inputNombre = document.getElementById("nombreInput");
+    inputNombre.classList.add("glass", "bg-blue-400");
+    inputNombre.value = "Bienvenido, " + nombre;
+    inputNombre.disabled = true;
+  }
+}
+
+function cerrarSesion() {
+  // Remover el nombre del almacenamiento local
+  sessionStorage.removeItem("nombre");
+  sessionStorage.removeItem("cart");
+
+  // Restaurar el botón a "Entrar"
+  const botonSesion = document.getElementById("botonSesion");
+  botonSesion.textContent = "Entrar";
+  botonSesion.onclick = iniciarSesion;
+
+  // Limpiar el valor del input y habilitarlo
+  const inputNombre = document.getElementById("nombreInput");
+  inputNombre.value = "";
+  inputNombre.disabled = false;
+}
+
+// Verificar si hay una sesión almacenada al cargar la página
+window.onload = function () {
+  const nombreSesion = sessionStorage.getItem("nombre");
+  if (nombreSesion) {
+    const botonSesion = document.getElementById("botonSesion");
+    botonSesion.textContent = "Cerrar sesión";
+    botonSesion.onclick = cerrarSesion;
+
+    const inputNombre = document.getElementById("nombreInput");
+    inputNombre.value = "Bienvenido, " + nombreSesion;
+    inputNombre.classList.add("glass", "bg-blue-400");
+    inputNombre.disabled = true;
+  }
+};
