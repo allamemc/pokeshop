@@ -57,7 +57,8 @@ function fetchPokemonData(offset) {
               "btn",
               "btn-primary",
               "compras",
-              "color-boton"
+              "color-boton",
+              "glass"
             );
 
             const iconElement = document.createElement("img");
@@ -98,6 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
     cartTotalElement.innerHTML = `<img src="../img/icono.png" width="25"> ${total}`;
   };
 
+  // Retrieve cart from session storage
+  const storedCart = sessionStorage.getItem("cart");
+  if (storedCart) {
+    cart = JSON.parse(storedCart);
+    total = calculateTotal(cart);
+  }
+
   // Evento al hacer click en el botón de compras
   document.addEventListener("click", (event) => {
     const targetButton = event.target.closest(".btn.compras");
@@ -110,12 +118,19 @@ document.addEventListener("DOMContentLoaded", () => {
       cart.push({ price: pokemonPrice });
       total += pokemonPrice;
 
+      // Save cart to session storage
+      sessionStorage.setItem("cart", JSON.stringify(cart));
+
       updateCartDisplay();
     }
   });
 
   updateCartDisplay();
 });
+
+function calculateTotal(cart) {
+  return cart.reduce((total, item) => total + item.price, 0);
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const previousButton = document.querySelector(
