@@ -92,11 +92,41 @@ document.addEventListener("DOMContentLoaded", () => {
   let total = 0;
 
   const updateCartDisplay = () => {
-    const cartItemsElement = document.querySelector(".card-body .text-lg");
-    const cartTotalElement = document.querySelector(".card-body .text");
+    const cartItemsElement = document.querySelector(".text-lg");
+    const cartTotalElement = document.querySelector(".text");
+    const badgeElement = document.querySelector(".badge.indicator-item");
+    const listElement = document.createElement("ul"); // Crear una lista ul
 
     cartItemsElement.textContent = `${cart.length} Pokemons`;
     cartTotalElement.innerHTML = `<img src="../img/icono.png" width="25"> ${total}`;
+    badgeElement.textContent = cart.length;
+
+    // Limpiar el contenido previo de la lista
+    while (cartItemsElement.firstChild) {
+      cartItemsElement.removeChild(cartItemsElement.firstChild);
+    }
+
+    // Determinar la cantidad máxima de elementos a mostrar
+    const maxItemsToShow = 10;
+    const itemsToShow = cart.slice(0, maxItemsToShow); // Obtener hasta 20 elementos
+
+    // Recorrer los elementos a mostrar en el carrito
+    itemsToShow.forEach((pokemon) => {
+      const listItem = document.createElement("li"); // Crear un elemento li
+      listItem.textContent = `${pokemon.name} - $${pokemon.price}`; // Asignar nombre y precio
+      listElement.appendChild(listItem); // Añadir el elemento li a la lista ul
+    });
+
+    // Si hay más elementos en el carrito, mostrar un mensaje indicando que hay más
+    if (cart.length > maxItemsToShow) {
+      const remainingItems = cart.length - maxItemsToShow;
+      const remainingItemsMessage = document.createElement("li");
+      remainingItemsMessage.textContent = `Y ${remainingItems} más...`;
+      listElement.appendChild(remainingItemsMessage);
+    }
+
+    // Añadir la lista al contenedor
+    cartItemsElement.appendChild(listElement);
   };
 
   // Retrieve cart from session storage
@@ -110,15 +140,17 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (event) => {
     const targetButton = event.target.closest(".btn.compras");
     if (targetButton) {
-      // Obtiene el nombre del Pokémon desde el elemento .nombre
+      // Obtener el nombre y el precio del Pokémon desde el contenedor de la tarjeta
+      const pokemonCard = targetButton.closest(".card");
+      const pokemonName = pokemonCard.querySelector(".nombre").textContent;
       const pokemonPrice = parseInt(
-        targetButton.querySelector(".price").textContent
+        pokemonCard.querySelector(".price").textContent
       );
 
-      cart.push({ price: pokemonPrice });
+      cart.push({ name: pokemonName, price: pokemonPrice }); // Agregar nombre y precio al objeto
       total += pokemonPrice;
 
-      // Save cart to session storage
+      // Guardar carrito en el almacenamiento de sesión
       sessionStorage.setItem("cart", JSON.stringify(cart));
 
       updateCartDisplay();
